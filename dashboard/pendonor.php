@@ -234,17 +234,19 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
 
             </div>
             <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> &copy; Donorku
-                        </p>
-                    </div>
-                    <div class="float-end">
-                        <p>Dibuat dengan <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            oleh <a href="https://www.instagram.com/fauziahzhraaa__/" target="_blank">Fauziah Zahra</a></p>
+                <div class="container">
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> &copy; Donorku
+                            </p>
+                        </div>
+                        <div class="float-end">
+                            <p>Dibuat dengan <span class="text-danger"><i class="bi bi-heart"></i></span>
+                                oleh <a href="https://www.instagram.com/fauziahzhraaa__/" target="_blank">Fauziah Zahra</a></p>
+                        </div>
                     </div>
                 </div>
             </footer>

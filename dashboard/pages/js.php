@@ -7,14 +7,14 @@
 <!-- Need: Apexcharts -->
 <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
 <script src="assets/extensions/dayjs/dayjs.min.js"></script>
-<!-- <script src="assets/static/js/pages/ui-apexchart.js"></script> -->
-<!-- <script src="assets/static/js/pages/dashboard.js"></script> -->
+<script src="assets/static/js/pages/ui-apexchart.js"></script>
+<script src="assets/static/js/pages/dashboard.js"></script>
 <script>
     // Mengambil data dari PHP
-    let totalLakiLaki = <?= $totalPenggunaLakiLaki; ?>; // Menggunakan data dari PHP
-    let totalPerempuan = <?= $totalPenggunaPerempuan; ?>; // Menggunakan data dari PHP
+    let totalLakiLaki = <?= $totalPendonorLakiLaki; ?>; // Menggunakan data dari PHP
+    let totalPerempuan = <?= $totalPendonorPerempuan; ?>; // Menggunakan data dari PHP
 
-    let optionsVisitorsProfile = {
+    let optionsPendonorJK = {
         series: [totalLakiLaki, totalPerempuan], // Menggunakan variabel yang diambil dari PHP
         labels: ["Laki-laki", "Perempuan"],
         colors: ["#435ebe", "#55c6e8"],
@@ -35,74 +35,77 @@
         },
     };
 
-    var chartVisitorsProfile = new ApexCharts(
-        document.getElementById("chart-visitors-profile"),
-        optionsVisitorsProfile
+    var chartPendonorJK = new ApexCharts(
+        document.getElementById("chart-pendonor-jk"),
+        optionsPendonorJK
     );
-    chartVisitorsProfile.render();
+    chartPendonorJK.render();
 </script>
 <script>
-    // // Mengambil data dari PHP
-    // var kegiatanLabels = <?php echo json_encode($kegiatanLabels); ?>;
-    // var tidakBerhasilCounts = <?php echo json_encode($finalCounts['tidak berhasil']); ?>;
-    // var berhasilCounts = <?php echo json_encode($finalCounts['berhasil']); ?>;
-    // var layakCounts = <?php echo json_encode($finalCounts['layak']); ?>;
+    // Mengambil data dari PHP
+    let totalBerhasil = <?= $totalPendonorBerhasil; ?>; // Menggunakan data dari PHP
+    let totalLayak = <?= $totalPendonorLayak; ?>; // Menggunakan data dari PHP
+    let totalGagal = <?= $totalPendonorGagal; ?>; // Menggunakan data dari PHP
 
-    // var barOptions = {
-    //     series: [{
-    //             name: "Tidak Berhasil",
-    //             data: tidakBerhasilCounts,
-    //         },
-    //         {
-    //             name: "Layak",
-    //             data: layakCounts,
-    //         },
-    //         {
-    //             name: "Berhasil",
-    //             data: berhasilCounts,
-    //         },
-    //     ],
-    //     chart: {
-    //         type: "bar",
-    //         height: 350,
-    //     },
-    //     plotOptions: {
-    //         bar: {
-    //             horizontal: false,
-    //             columnWidth: "55%",
-    //             endingShape: "rounded",
-    //         },
-    //     },
-    //     dataLabels: {
-    //         enabled: false,
-    //     },
-    //     stroke: {
-    //         show: true,
-    //         width: 2,
-    //         colors: ["transparent"],
-    //     },
-    //     xaxis: {
-    //         categories: kegiatanLabels, // Menggunakan data nama kegiatan dari PHP
-    //     },
-    //     yaxis: {
-    //         title: {
-    //             text: "Jumlah",
-    //         },
-    //     },
-    //     fill: {
-    //         opacity: 1,
-    //     },
-    //     tooltip: {
-    //         y: {
-    //             formatter: function(val) {
-    //                 return val + " donor";
-    //             },
-    //         },
-    //     },
-    // };
+    let optionsRiwayatDonor = {
+        series: [totalBerhasil, totalLayak, totalGagal], // Menggunakan variabel yang diambil dari PHP
+        labels: ["Berhasil Donor", "Layak Tidak Donor", "Gagal Donor"],
+        colors: ["#C82232", "#FEDA6F", "#000000"],
+        chart: {
+            type: "donut",
+            width: "100%",
+            height: "350px",
+        },
+        legend: {
+            position: "bottom",
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: "30%",
+                },
+            },
+        },
+    };
 
-    // var bar = new ApexCharts(document.querySelector("#bar"), barOptions);
-    // bar.render();
+    var chartRiwayatDonor = new ApexCharts(
+        document.getElementById("chart-riwayat-donor"),
+        optionsRiwayatDonor
+    );
+    chartRiwayatDonor.render();
+</script>
+<script>
+    // Mengambil data dari PHP
+    let totalSelesai = <?= $totalKegiatanSelesai; ?>; // Menggunakan data dari PHP
+    let totalBerlangsung = <?= $totalKegiatanBerlangsung; ?>; // Menggunakan data dari PHP
+    let totalSegera = <?= $totalKegiatanSegera; ?>; // Menggunakan data dari PHP
+
+    let optionsRiwayatKegiatan = {
+        series: [totalSelesai, totalBerlangsung, totalSegera], // Menggunakan variabel yang diambil dari PHP
+        labels: ["Kegiatan Selesai", "Sedang Berlangsung", "Segera"],
+        colors: ["#F44336", "#FFC107", "#4CAF50"],
+        chart: {
+            type: "donut",
+            width: "100%",
+            height: "350px",
+        },
+        legend: {
+            position: "bottom",
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: "30%",
+                },
+            },
+        },
+    };
+
+    var chartRiwayatKegiatan = new ApexCharts(
+        document.getElementById("chart-riwayat-kegiatan"),
+        optionsRiwayatKegiatan
+    );
+    chartRiwayatKegiatan.render();
 </script>
 
 <!-- Custom Sweet Alert 2 -->

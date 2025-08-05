@@ -117,11 +117,31 @@
                             <h4>Jenis Pendonor</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-visitors-profile"></div>
+                            <div id="chart-pendonor-jk"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-8">
+                <div class="col-12 col-xl-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Riwayat Donor</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-riwayat-donor"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Riwayat Kegiatan</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-riwayat-kegiatan"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-10">
                     <div class="card">
                         <div class="card-header">
                             <h4>Donor Darah Terakhir</h4>
