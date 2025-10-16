@@ -145,14 +145,14 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
                                                 <?php
                                                 include '../functions/koneksi.php';
 
-                                                $query = "SELECT a.nama_user, a.gol_darah, a.id_user, a.foto_identitas, a.tanggal_lahir, b.id_riwayat, b.usia FROM users a, riwayat_donor b WHERE a.nama_user = b.nama_user AND b.status = 'layak' AND b.id_kegiatan = '$id_kegiatan'";
+                                                $query = "SELECT a.nama_user, a.gol_darah, a.id_user, a.foto_identitas, a.tanggal_lahir, a.email, b.id_riwayat, b.usia FROM users a, riwayat_donor b WHERE a.nama_user = b.nama_user AND b.status = 'layak' AND b.id_kegiatan = '$id_kegiatan'";
 
                                                 $result = mysqli_query($koneksi, $query);
 
                                                 while ($users = mysqli_fetch_array($result)) :
 
                                                 ?>
-                                                    <option value="<?= $users['nama_user']; ?>" data-id="<?= $users['id_user']; ?>" data-nama="<?= $users['nama_user']; ?>" data-foto_identitas="<?= $users['foto_identitas']; ?>" data-usia="<?= $users['usia']; ?>" data-gol_darah="<?= $users['gol_darah']; ?>">
+                                                    <option value="<?= $users['nama_user']; ?>" data-nama="<?= $users['nama_user']; ?>" data-id="<?= $users['id_user']; ?>" data-nama="<?= $users['nama_user']; ?>" data-email="<?= $users['email']; ?>" data-foto_identitas="<?= $users['foto_identitas']; ?>" data-usia="<?= $users['usia']; ?>" data-gol_darah="<?= $users['gol_darah']; ?>">
 
                                                         <?= $users['nama_user']; ?>
 
@@ -231,12 +231,11 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="foto_identitas" class="form-label">Foto Identitas</label>
+                                            <label for="foto_identitas" id="nama_identitas" class="form-label">Foto Identitas (KTP/SIM)</label>
                                             <div class="row gallery" data-bs-toggle="modal" data-bs-target="#galleryModal">
                                                 <div class="col-6 col-sm-6 col-lg-3 mt-2 mt-md-0 mb-md-0 mb-2">
                                                     <a href="#">
-                                                        <img style="width: 200px;" src="assets/<?= empty($foto_identitas) ? 'static/images/faces/1.jpg' : 'foto_identitas/' . htmlspecialchars($foto_identitas) ?>" id="foto_identitas" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" alt="Foto Identitas" onerror="this.src='assets/static/images/faces/1.jpg'">
-
+                                                        <img style="width: 200px;" id="foto_identitas" src="assets/<?= empty($foto_identitas) ? 'static/images/faces/1.jpg' : 'foto_identitas/' . htmlspecialchars($foto_identitas) ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" alt="Foto Identitas" onerror="this.src='assets/static/images/faces/1.jpg'">
                                                     </a>
                                                 </div>
                                             </div>
@@ -271,8 +270,11 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
                                         </div>
                                     </div>
 
+                                    <input type="hidden" name="email_user" id="email_user">
+                                    <input type="hidden" name="tanggal_kegiatan" value="<?= $tanggal_kegiatan; ?>">
                                     <input type="hidden" name="id_kegiatan" value="<?= $id_kegiatan; ?>">
                                     <input type="hidden" name="id_riwayat" value="<?= $riwayat['id_riwayat']; ?>">
+
                                     <!-- Submit -->
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end">
@@ -304,7 +306,8 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="galleryModalTitle">Foto Identitas (KTP/SIM) <?= $sesi_nama; ?></h5>
+                <h5 class="modal-title" id="nama_identitasPreview">Foto Identitas (KTP/SIM)
+                </h5>
                 <button type="button" class="close" data-bs-dismiss="modal"
                     aria-label="Close">
                     <i data-feather="x"></i>
@@ -317,16 +320,9 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="assets/<?= empty($foto_identitas) ? 'static/images/faces/1.jpg' : 'foto_identitas/' . htmlspecialchars($foto_identitas) ?>" id="foto_identitasM" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" alt="Foto Identitas" onerror="this.src='assets/static/images/faces/1.jpg'">
-
+                            <img class="d-block w-100" id="foto_identitasPreview" src="assets/<?= empty($foto_identitas) ? 'static/images/faces/1.jpg' : 'foto_identitas/' . htmlspecialchars($foto_identitas) ?>" data-bs-target="#Gallerycarousel" data-bs-slide-to="0" alt="Foto Identitas" onerror="this.src='assets/static/images/faces/1.jpg'">
                         </div>
                     </div>
-                    <!-- <a class="carousel-control-prev" href="#Gallerycarousel" role="button" type="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#Gallerycarousel" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a> -->
                 </div>
             </div>
 
@@ -343,11 +339,16 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
         const golDarahSelect = document.getElementById("gol_darah");
         const usiaInput = document.getElementById("usia");
         const fotoIdentitas = document.getElementById("foto_identitas");
+        const emailInput = document.getElementById("email_user");
+        const namaIdentitas = document.getElementById("nama_identitas");
+        const nama_identitasPreview = document.getElementById("nama_identitasPreview");
 
         // Ambil data dari <option> yang dipilih
         const selectedOption = namaUserSelect.options[namaUserSelect.selectedIndex];
         const id_user = selectedOption.getAttribute("data-id");
+        const nama_user = selectedOption.getAttribute("data-nama");
         const gol_darah = selectedOption.getAttribute("data-gol_darah");
+        const email = selectedOption.getAttribute("data-email");
         const usia = selectedOption.getAttribute("data-usia");
         const foto_identitas = selectedOption.getAttribute("data-foto_identitas");
 
@@ -355,13 +356,16 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
         idUserInput.value = id_user;
         golDarahSelect.value = gol_darah;
         usiaInput.value = usia;
+        emailInput.value = email;
         fotoIdentitas.value = foto_identitas;
+        namaIdentitas.textContent = "Foto Identitas (KTP/SIM) " + nama_user;
+        nama_identitasPreview.textContent = "Foto Identitas (KTP/SIM) " + nama_user;
 
         // Update src of the image
         const imgElement = document.getElementById("foto_identitas");
-        const imgElementM = document.getElementById("foto_identitasM");
+        const imgElementPreview = document.getElementById("foto_identitasPreview");
         imgElement.src = 'assets/foto_identitas/' + foto_identitas;
-        imgElementM.src = 'assets/foto_identitas/' + foto_identitas;
+        imgElementPreview.src = 'assets/foto_identitas/' + foto_identitas;
     };
 
     window.onload = function() {

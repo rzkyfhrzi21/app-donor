@@ -130,6 +130,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                         </div>
                                     </div>
                                     <input type="hidden" name="id_kegiatan" value="<?= $kegiatan['id_kegiatan']; ?>">
+
                                 </div>
                             </div>
                         </div>
@@ -142,7 +143,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                             <p>(berbasis pedoman PMI dan UDD)</p>
                         </div>
                         <div class="card-body">
-                            <form action="proses_donor.php" method="POST">
+                            <form action="../functions/function_donor.php" method="POST">
                                 <!-- SOAL 1 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
@@ -175,30 +176,10 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 </div>
                                 <!-- SOAL 2 END -->
 
-                                <!-- SOAL 3 START -->
-                                <div class="row mb-4">
-                                    <div class="col-12">
-                                        <p>3. Apakah tekanan darah Anda normal (tidak terlalu tinggi/rendah)?</p>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="radio" class="form-check-input" name="tekanan_darah" id="ya3" value="Ya" required>
-                                        <label class="form-check-label" for="ya3">Ya</label>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="radio" class="form-check-input" name="tekanan_darah" id="tidak3" value="Tidak">
-                                        <label class="form-check-label" for="tidak3">Tidak</label>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="radio" class="form-check-input" name="tekanan_darah" id="tidak_tahu3" value="Tidak Tahu">
-                                        <label class="form-check-label" for="tidak_tahu3">Tidak Tahu</label>
-                                    </div>
-                                </div>
-                                <!-- SOAL 3 END -->
-
                                 <!-- SOAL 4 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>4. Apakah Anda sedang hamil, menyusui, atau baru melahirkan dalam 6 bulan terakhir?</p>
+                                        <p>3. Apakah Anda sedang hamil, menyusui, atau baru melahirkan dalam 6 bulan terakhir?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="hamil" id="ya4" value="Ya" required>
@@ -214,7 +195,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 5 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>5. Apakah Anda baru menerima vaksin dalam 14 hari terakhir?</p>
+                                        <p>4. Apakah Anda baru menerima vaksin dalam 14 hari terakhir?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="vaksin" id="ya5" value="Ya" required>
@@ -230,7 +211,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 6 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>6. Apakah Anda memiliki riwayat penyakit berat (jantung, paru-paru, ginjal, diabetes, epilepsi)?</p>
+                                        <p>5. Apakah Anda memiliki riwayat penyakit berat (jantung, paru-paru, ginjal, diabetes, epilepsi)?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="riwayat_penyakit" id="ya6" value="Ya" required>
@@ -246,7 +227,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 7 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>7. Apakah Anda pernah menerima transfusi darah dalam 1 tahun terakhir?</p>
+                                        <p>6. Apakah Anda pernah menerima transfusi darah dalam 1 tahun terakhir?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="transfusi" id="ya7" value="Ya" required>
@@ -262,7 +243,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 8 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>8. Apakah Anda pernah melakukan tindik, tato, atau akupuntur dalam 1 tahun terakhir?</p>
+                                        <p>7. Apakah Anda pernah melakukan tindik, tato, atau akupuntur dalam 1 tahun terakhir?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="tindik" id="ya8" value="Ya" required>
@@ -278,7 +259,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 9 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>9. Apakah Anda sedang mengonsumsi obat-obatan tertentu saat ini?</p>
+                                        <p>8. Apakah Anda sedang mengonsumsi obat-obatan tertentu saat ini?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="obat" id="ya9" value="Ya" required>
@@ -294,7 +275,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 10 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>10. Apakah Anda sedang haid (untuk perempuan)?</p>
+                                        <p>9. Apakah Anda sedang haid (untuk perempuan)?</p>
                                     </div>
                                     <div class="col-4">
                                         <input type="radio" class="form-check-input" name="haid" id="ya10" value="Ya" required>
@@ -314,7 +295,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 11 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>11. Berapa usia anda sekarang?</p>
+                                        <p>10. Berapa usia anda sekarang?</p>
                                     </div>
                                     <div class="col-8">
                                         <input
@@ -333,7 +314,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 12 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>12. Sudah berapa kali Anda mendonorkan darah sebelumnya?</p>
+                                        <p>11. Sudah berapa kali Anda mendonorkan darah sebelumnya?</p>
                                     </div>
                                     <div class="col-8">
                                         <select class="form-select" name="jumlah_donor" required>
@@ -348,7 +329,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                 <!-- SOAL 13 START -->
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <p>13. Kapan terakhir kali Anda melakukan donor darah?</p>
+                                        <p>12. Kapan terakhir kali Anda melakukan donor darah?</p>
                                     </div>
                                     <div class="col-8">
                                         <select class="form-select" name="terakhir_donor" required>
@@ -360,7 +341,7 @@ $kegiatan       = mysqli_fetch_array($query_kegiatan);
                                     </div>
                                 </div>
                                 <!-- SOAL 13 END -->
-
+                                <input type="hidden" name="email_user" value="<?= $sesi_email; ?>">
                                 <input type="submit" name="btn_daftardonor" class="btn btn-primary" value="Daftar Donor">
                             </form>
                         </div>

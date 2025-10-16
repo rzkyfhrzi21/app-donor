@@ -11,6 +11,7 @@ $jenis_kelamin  = isset($_SESSION['form_data']['jenis_kelamin']) ? $_SESSION['fo
 $tempat_lahir   = isset($_SESSION['form_data']['tempat_lahir']) ? $_SESSION['form_data']['tempat_lahir'] : '';
 $tanggal_lahir  = isset($_SESSION['form_data']['tanggal_lahir']) ? $_SESSION['form_data']['tanggal_lahir'] : '';
 $alamat         = isset($_SESSION['form_data']['alamat']) ? $_SESSION['form_data']['alamat'] : '';
+$email          = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
 $username       = isset($_SESSION['form_data']['username']) ? $_SESSION['form_data']['username'] : '';
 $role           = isset($_SESSION['form_data']['role']) ? $_SESSION['form_data']['role'] : '';
 
@@ -76,6 +77,20 @@ unset($_SESSION['form_data']);
                                                 placeholder="Nama Lengkap"
                                                 minlength="3"
                                                 value="<?= $nama_user; ?>"
+                                                data-parsley-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group mandatory">
+                                            <label for="nama_lengkap" class="form-label">Email</label>
+                                            <input
+                                                type="email"
+                                                id="nama_lengkap"
+                                                class="form-control"
+                                                name="email"
+                                                placeholder="Email"
+                                                minlength="3"
+                                                value="<?= $email; ?>"
                                                 data-parsley-required="true" />
                                         </div>
                                     </div>

@@ -26,6 +26,7 @@ if ($sql = mysqli_query($koneksi, $query)) {
     $id_user        = isset($users['id_user']) ? $users['id_user'] : '';
     $img_user       = isset($users['img_user']) ? $users['img_user'] : '';
     $no_telp        = isset($users['no_telp']) ? $users['no_telp'] : '';
+    $email        = isset($users['email']) ? $users['email'] : '';
     $gol_darah      = isset($users['gol_darah']) ? $users['gol_darah'] : '';
     $jenis_kelamin  = isset($users['jenis_kelamin']) ? $users['jenis_kelamin'] : '';
     $tempat_lahir   = isset($users['tempat_lahir']) ? $users['tempat_lahir'] : '';
@@ -284,8 +285,8 @@ if ($sql = mysqli_query($koneksi, $query)) {
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-md-12 col-12">
+                        <div class="row form-group mandatory has-icon-left">
+                            <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="tanggal_lahir" class="form-label">Foto Identitas (KTP/SIM)</label>
                                     <p>
@@ -301,6 +302,23 @@ if ($sql = mysqli_query($koneksi, $query)) {
                                         </div>
                                     </div>
                                     <input name="foto_identitas" class="mt-3 image-preview-filepond" image-crop-aspect-ratio="1:1" type="file" id="formFileFotoIdentitas" data-max-file-size="1MB" data-max-files="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="email" class="form-label">Email</label>
+                                <div class="position-relative">
+                                    <input
+                                        type="text"
+                                        id="email"
+                                        class="form-control"
+                                        name="email"
+                                        placeholder="Email"
+                                        minlength="3"
+                                        value="<?= htmlspecialchars($email); ?>"
+                                        data-parsley-required="true" />
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>

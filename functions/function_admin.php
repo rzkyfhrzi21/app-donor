@@ -26,6 +26,7 @@ $_SESSION['form_data'] = [
 	'username'       => isset($_POST['username']) ? htmlspecialchars(trim($_POST['username'])) : '',
 	'role'           => isset($_POST['role']) ? htmlspecialchars(trim($_POST['role'])) : '',
 	'no_telp'        => isset($_POST['no_telp']) ? htmlspecialchars(trim($_POST['no_telp'])) : '',
+	'email'        => isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '',
 ];
 
 function uploadImg()
@@ -140,6 +141,7 @@ if (isset($_POST['btn_adminregister'])) {
 	$no_telp            	= htmlspecialchars(trim($_POST['no_telp']));
 	$password           	= htmlspecialchars(trim($_POST['password']));
 	$konfirmasi_password 	= htmlspecialchars(trim($_POST['konfirmasi_password']));
+	$email 					= htmlspecialchars(trim($_POST['email']));
 
 	// Validasi username
 	$cek_user_query 	= "SELECT COUNT(*) FROM users WHERE username = '$username'";
@@ -178,8 +180,8 @@ if (isset($_POST['btn_adminregister'])) {
 		$img_user			= uploadImg();
 		$foto_identitas		= uploadIdentitas();
 		$hashed_password 	= md5($password);
-		$query_tambah 		= "INSERT INTO users (id_user, img_user, nama_user, no_telp, gol_darah, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, foto_identitas, username, password, role) 
-                         VALUES ('$id_user', '$img_user', '$nama_user', '$no_telp', '$gol_darah', '$jenis_kelamin', '$tempat_lahir', '$tanggal_lahir', '$alamat','$foto_identitas', '$username', '$hashed_password', '$role')";
+		$query_tambah 		= "INSERT INTO users (id_user, email, img_user, nama_user, no_telp, gol_darah, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, foto_identitas, username, password, role) 
+                         VALUES ('$id_user', 'email '$img_user', '$nama_user', '$no_telp', '$gol_darah', '$jenis_kelamin', '$tempat_lahir', '$tanggal_lahir', '$alamat','$foto_identitas', '$username', '$hashed_password', '$role')";
 
 		if (mysqli_query($koneksi, $query_tambah)) {
 			// Berhasil
@@ -203,6 +205,7 @@ if (isset($_POST['btn_editdatapribadi'])) {
 	$tempat_lahir   = htmlspecialchars(trim($_POST['tempat_lahir']));
 	$tanggal_lahir  = htmlspecialchars(trim($_POST['tanggal_lahir']));
 	$alamat         = htmlspecialchars(trim($_POST['alamat']));
+	$email         	= htmlspecialchars(trim($_POST['email']));
 
 	$identitas_lama = htmlspecialchars($_POST['identitas_lama']);
 
@@ -213,7 +216,7 @@ if (isset($_POST['btn_editdatapribadi'])) {
 		$foto_identitas	= uploadIdentitas();
 	}
 
-	$query_update 	= "UPDATE users SET nama_user = '$nama_user', no_telp = '$no_telp', gol_darah = '$gol_darah', jenis_kelamin = '$jenis_kelamin', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', foto_identitas = '$foto_identitas', alamat = '$alamat' WHERE id_user = '$id_user'";
+	$query_update 	= "UPDATE users SET nama_user = '$nama_user', email = '$email', no_telp = '$no_telp', gol_darah = '$gol_darah', jenis_kelamin = '$jenis_kelamin', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', foto_identitas = '$foto_identitas', alamat = '$alamat' WHERE id_user = '$id_user'";
 	$update 		= mysqli_query($koneksi, $query_update);
 
 	// Eksekusi query

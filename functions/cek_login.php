@@ -17,6 +17,7 @@ if (isset($_POST['btn_login'])) {
 		$_SESSION['sesi_role']		= $data_user['role'];
 		$_SESSION['sesi_username']	= $data_user['username'];
 		$_SESSION['sesi_nama']		= $data_user['nama_user'];
+		$_SESSION['sesi_email']		= $data_user['email'];
 
 		if ($data_user['img_user'] == '') {
 			if ($data_user['role'] == 'admin') {

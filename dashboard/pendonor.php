@@ -14,10 +14,13 @@ if ($sql = mysqli_query($koneksi, $query)) {
     $users = mysqli_fetch_array($sql);
     // Ambil data pengguna
     $sesi_nama      = isset($users['nama_user']) ? $users['nama_user'] : '';
+    $sesi_email      = isset($users['email']) ? $users['email'] : '';
     $sesi_username  = isset($users['username']) ? $users['username'] : '';
     $sesi_role      = isset($users['role']) ? $users['role'] : '';
     $sesi_img       = isset($users['img_user']) ? $users['img_user'] : '';
 }
+
+
 
 // Pastikan pengguna sudah login dan memiliki role admin
 if (!isset($sesi_role) || $sesi_role !== 'pendonor') {
