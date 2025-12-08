@@ -203,11 +203,6 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                                     <span><i class="bi bi-image-fill"></i> Galeri Donor</span>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="?page=tes" class='menu-link'>
-                                    <span><i class="bi bi-grid-fill"></i> Tes</span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
