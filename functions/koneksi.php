@@ -16,10 +16,10 @@ if ($host === 'localhost' || strpos($host, '127.0.0.1') !== false) {
     $database   = 'app_donor';
 } else {
     // UNTUK PENGGUNAAN HOSTING SERVERMIKRO
-    $server     = 'localhost';
-    $username   = 'mhjvvvci_donorku';
-    $password   = 'v449yvBvbKXCmrMutSg6';
-    $database   = 'mhjvvvci_donorku';
+    $server     = '';
+    $username   = '';
+    $password   = '';
+    $database   = '';
 }
 
 $koneksi    = mysqli_connect($server, $username, $password, $database);
