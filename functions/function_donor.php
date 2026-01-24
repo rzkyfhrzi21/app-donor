@@ -50,17 +50,53 @@ if (isset($_POST['btn_daftardonor'])) {
     // ===============================
     // 💉 Validasi kelayakan pendonor
     // ===============================
-    if (
-        $keadaan_sehat === 'Tidak' || $gejala === 'Ya' || $hamil === 'Ya' ||
-        $vaksin === 'Ya' || $riwayat_penyakit === 'Ya' || $transfusi === 'Ya' || $tindik === 'Ya' ||
-        $obat === 'Ya' || $haid === 'Ya' || $terakhir_donor === '<2 bulan lalu' || $usia < 17 || $usia > 65
-    ) {
-        $status = 'tidak berhasil';
-        $ket = 'gagal';
-        $keterangan = 'Anda belum memenuhi syarat donor darah.';
+    if ($keadaan_sehat === 'Tidak') {
+        $status     = 'tidak berhasil';
+        $ket        = 'tidaksehat';
+        $keterangan = 'Kondisi badan sedang tidak sehat sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($gejala === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'adagejala';
+        $keterangan = 'Kondisi badan sedang tidak prima karena terdapat gejala penyakit, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($hamil === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'sedanghamil';
+        $keterangan = 'Anda sedang dalam masa hamil, menyusui, atau baru melahirkan, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($vaksin === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'baruvaksin';
+        $keterangan = 'Anda baru saja menerima vaksin, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($riwayat_penyakit === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'adariwayatpenyakit';
+        $keterangan = 'Anda memiliki riwayat penyakit berat, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($transfusi === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'barutransfusi';
+        $keterangan = 'Anda baru saja menerima transfusi darah, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($tindik === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'adatindik';
+        $keterangan = 'Anda baru saja melakukan tindik, yang dapat meningkatkan risiko infeksi, sehingga tidak diperbolehkan untuk mendonorkan darah.';
+    } else if ($usia < 17 || $usia > 65) {
+        $status     = 'tidak berhasil';
+        $ket        = 'usianotvalid';
+        $keterangan = 'Usia Anda tidak memenuhi syarat untuk mendonorkan darah. Anda harus berusia antara 17 hingga 65 tahun.';
+    } else if ($obat === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'barukonsumsiobat';
+        $keterangan = 'Anda sedang mengonsumsi obat-obatan, yang dapat mempengaruhi kesehatan Anda dan kelayakan untuk mendonorkan darah.';
+    } else if ($haid === 'Ya') {
+        $status     = 'tidak berhasil';
+        $ket        = 'baruhaid';
+        $keterangan = 'Anda sedang dalam masa haid, yang dapat mempengaruhi kesehatan dan kelayakan Anda untuk mendonorkan darah.';
+    } else if ($terakhir_donor === '<2 bulan lalu') {
+        $status     = 'tidak berhasil';
+        $ket        = 'belum60hari';
+        $keterangan = 'Anda belum memenuhi syarat waktu minimal antara donor darah. Anda harus menunggu setidaknya 60 hari setelah donor terakhir.';
     } else {
-        $status = 'layak';
-        $keterangan = 'Anda memenuhi semua syarat untuk mendonorkan darah.';
+        $status     = 'layak';
+        $keterangan = 'Anda memenuhi semua syarat untuk mendonorkan darah. Silakan datang ke lokasi untuk cek kesehatan';
     }
 
     // Simpan ke database
@@ -140,21 +176,30 @@ if (isset($_POST['btn_mulaidonor'])) {
     // ===========================
     // 🔍 Validasi kesehatan donor
     // ===========================
-    if (
-        $berat_badan < $kriteria['bb_minimal'] ||
-        $nilai_hb < $kriteria['hb_minimal'] || $nilai_hb > $kriteria['hb_maksimal'] ||
-        $sistolik < $kriteria['sistolik_minimal'] || $sistolik > $kriteria['sistolik_maksimal'] ||
-        $diastolik < $kriteria['diastolik_minimal'] || $diastolik > $kriteria['diastolik_maksimal'] ||
-        $data_sesuai == 'tidak'
-    ) {
-        $status = 'tidak berhasil';
-        $ket = 'gagal';
-        $keterangan = 'Donor gagal karena tidak memenuhi syarat kesehatan.';
-    } else {
-        $status = 'berhasil';
-        $keterangan = 'Donor darah berhasil dilakukan. Terima kasih atas partisipasi Anda!';
+    if ($berat_badan < $kriteria['bb_minimal']) { // Validasi BB Pendonor
+        $status     = 'tidak berhasil';
+        $ket        = 'bbnotvalid';
+        $keterangan = 'Berat badan Anda tidak memenuhi syarat minimal untuk mendonorkan darah. Pastikan berat badan Anda setidaknya ' . $kriteria['bb_minimal'] . ' kg.';
+    } else if ($nilai_hb < $kriteria['hb_minimal'] || $nilai_hb > $kriteria['hb_maksimal']) { // Validasi Hemoglobin Pendonor
+        $status     = 'tidak berhasil';
+        $ket        = 'nilaihbnotvalid';
+        $keterangan = 'Nilai hemoglobin Anda tidak memenuhi syarat. Nilai hemoglobin harus berada dalam rentang ' . $kriteria['hb_minimal'] . ' - ' . $kriteria['hb_maksimal'] . ' g/dL.';
+    } else if ($sistolik < $kriteria['sistolik_minimal'] || $sistolik > $kriteria['sistolik_maksimal']) { // Validasi Tekanan Darah Atas Pendonor
+        $status     = 'tidak berhasil';
+        $ket        = 'tensinotvalid';
+        $keterangan = 'Tekanan darah sistolik Anda tidak memenuhi syarat. Tekanan darah sistolik harus berada dalam rentang ' . $kriteria['sistolik_minimal'] . ' - ' . $kriteria['sistolik_maksimal'] . ' mmHg.';
+    } else if ($diastolik < $kriteria['diastolik_minimal'] || $diastolik > $kriteria['diastolik_maksimal']) { // Validasi Tekanan Darah Bawah Pendonor
+        $status     = 'tidak berhasil';
+        $ket        = 'tensinotvalid';
+        $keterangan = 'Tekanan darah diastolik Anda tidak memenuhi syarat. Tekanan darah diastolik harus berada dalam rentang ' . $kriteria['diastolik_minimal'] . ' - ' . $kriteria['diastolik_maksimal'] . ' mmHg.';
+    } else if ($data_sesuai == 'tidak') { // Validasi Tekanan Darah Bawah Pendonor
+        $status     = 'tidak berhasil';
+        $ket        = 'datanotvalid';
+        $keterangan = 'Data anda tidak sesuai dengan foto identitas.';
+    } else { // Pendonor Bisa Donor Jika Lolos Semua Validasi
+        $status     = 'berhasil';
+        $keterangan = 'Anda memenuhi semua syarat untuk mendonorkan darah. Setetes darah anda sangat berarti!';
     }
-
     // Simpan hasil pemeriksaan ke database
     $query_update = "UPDATE riwayat_donor 
                         SET 
